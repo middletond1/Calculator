@@ -12,17 +12,17 @@ function getNumberFromButton(button) {
     return clickedNumber;
 }
 
-function checkForSingleZero() {
-    if (numberInput.textContent === '0' && numberInput.textContent.length === 1) {
+function checkForSingleZero(button) {
+    if (numberInput.textContent === '0' && numberInput.textContent.length === 1 && button.target.classList.contains('number')) {
         numberInput.textContent = '';
     };
 }
 
 function writeNumberToNumberInput(button) {
-    if (numberInput.textContent.length >= 20) {
+    if (numberInput.textContent.length >= 15) {
         return;
     };
-    checkForSingleZero();
+    checkForSingleZero(button);
     numberInput.textContent = numberInput.textContent.concat(getNumberFromButton(button));
 }
 
@@ -48,4 +48,16 @@ function writeToInput(button) {
     clearInput(button);
 }
 
+function getCurrentInputNumber() {
+    return parseFloat(numberInput.textContent);
+}
+
+function operationStuff(button) {
+    const additionButton = document.querySelector('#addition')
+    if (button.target === additionButton) {
+        console.log(getCurrentInputNumber());
+    }
+}
+
 buttonArea.addEventListener('click', writeToInput);
+buttonArea.addEventListener('click', operationStuff);
