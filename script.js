@@ -12,9 +12,18 @@ function getNumberFromButton(button) {
     return clickedNumber;
 }
 
+function checkForSingleZero() {
+    if (numberInput.textContent === '0' && numberInput.textContent.length === 1) {
+        numberInput.textContent = '';
+    };
+}
 
 function writeNumberToNumberInput(button) {
-    console.log(getNumberFromButton(button));
+    if (numberInput.textContent.length === 20) {
+        return;
+    };
+    checkForSingleZero();
+    numberInput.textContent = numberInput.textContent.concat(getNumberFromButton(button));
 }
 
 buttonArea.addEventListener('click', writeNumberToNumberInput);
