@@ -56,8 +56,9 @@ function getCurrentInputNumber() {
 
 function operationStuff(button) {
     const additionButton = document.querySelector('#addition')
-    if (button.target === additionButton) {
+    if (button.target === additionButton && numberInput.textContent !== '') {
         getCurrentInputNumber();
+        numberInput.textContent = '';
     }
 }
 
