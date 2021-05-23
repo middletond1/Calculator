@@ -1,8 +1,12 @@
 const numberButtons = document.querySelectorAll('.number');
+const buttonArea = document.querySelector('#buttons');
 
-function getNumberFromButton() {
-    // numberButtons.map(numberButton => console.log(numberButton));
-    console.log(numberButtons)
+function getNumberFromButton(button) {
+    Array.from(numberButtons).map(numberButton => {
+        if (button.target.textContent === numberButton.textContent) {
+            return numberButton.textContent;
+        }
+    });
 }
 
-getNumberFromButton();
+buttonArea.addEventListener('click', getNumberFromButton);
