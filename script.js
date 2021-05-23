@@ -1,6 +1,7 @@
 const numberButtons = document.querySelectorAll('.number');
 const buttonArea = document.querySelector('#buttons');
 const numberInput = document.querySelector('#numberinput');
+let operationNumbers = [];
 
 function getNumberFromButton(button) {
     let clickedNumber = '';
@@ -49,13 +50,14 @@ function writeToInput(button) {
 }
 
 function getCurrentInputNumber() {
-    return parseFloat(numberInput.textContent);
+    operationNumbers.push(parseFloat(numberInput.textContent));
+    console.log(operationNumbers);
 }
 
 function operationStuff(button) {
     const additionButton = document.querySelector('#addition')
     if (button.target === additionButton) {
-        console.log(getCurrentInputNumber());
+        getCurrentInputNumber();
     }
 }
 
