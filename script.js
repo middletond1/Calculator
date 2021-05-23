@@ -63,4 +63,4 @@ function operationStuffTest(button) {
 }
 
 buttonArea.addEventListener('click', writeToInput);
-buttonArea.addEventListener('click', operationStuff);
+buttonArea.addEventListener('click', operationStuffTest);
