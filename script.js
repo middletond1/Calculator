@@ -1,4 +1,5 @@
 const numberButtons = document.querySelectorAll('.number');
+const decimalButton = document.querySelector('#decimal')
 const buttonArea = document.querySelector('#buttons');
 const numberInput = document.querySelector('#numberinput');
 
@@ -26,4 +27,17 @@ function writeNumberToNumberInput(button) {
     numberInput.textContent = numberInput.textContent.concat(getNumberFromButton(button));
 }
 
-buttonArea.addEventListener('click', writeNumberToNumberInput);
+function insertDecimal(button) {
+    if (button.target === decimalButton) {
+        if (numberInput.textContent.includes('.')) {
+            return;
+        } else numberInput.textContent = numberInput.textContent.concat('.')
+    }
+}
+
+function writeToInput(button) {
+    writeNumberToNumberInput(button);
+    insertDecimal(button);
+}
+
+buttonArea.addEventListener('click', writeToInput);
