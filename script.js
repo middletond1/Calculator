@@ -49,18 +49,32 @@ function writeToInput(button) {
     clearInput(button);
 }
 
-function getCurrentInputNumber() {
+function concatCurrentInputToOpNumbers() {
     operationNumbers.push(parseFloat(numberInput.textContent));
     console.log(operationNumbers);
 }
 
-function operationStuffTest(button) {
+function additionButtonFunction(button) {
     const additionButton = document.querySelector('#addition')
-    if (button.target === additionButton && numberInput.textContent !== '') {
-        getCurrentInputNumber();
+    if (button.target === additionButton && numberInput.textContent !== '' && button.target.classList.contains('addinprogress')) {
+        concatCurrentInputToOpNumbers();
+        addNumbers(operationNumbers, operationNumbers.length);
+        additionButton.classList.add('addinprogress');
+        numberInput.textContent = '';
+    } else if (button.target === additionButton && numberInput.textContent !== '') {
+        concatCurrentInputToOpNumbers();
+        additionButton.classList.add('addinprogress');
         numberInput.textContent = '';
     }
 }
 
+function addNumbers(array, arrayLength) {
+    let sum = 0;
+    for (i = 0; i < arrayLength; i++) {
+        sum += array[i];
+    }
+    console.log(sum);
+}
+
 buttonArea.addEventListener('click', writeToInput);
-buttonArea.addEventListener('click', operationStuffTest);
+buttonArea.addEventListener('click', additionButtonFunction);
