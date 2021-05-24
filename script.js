@@ -1,6 +1,10 @@
 const numberButtons = document.querySelectorAll('.number');
 const buttonArea = document.querySelector('#buttons');
 const numberInput = document.querySelector('#numberinput');
+const additionButton = document.querySelector('#addition');
+const subtractionButton = document.querySelector('#subtraction');
+const multiplicationButton = document.querySelector('#multiplication');
+const divisionButton = document.querySelector('#division');
 let operationNumbers = [];
 
 function getNumberFromButton(button) {
@@ -55,7 +59,6 @@ function concatCurrentInputToOpNumbers() {
 }
 
 function additionButtonFunction(button) {
-    const additionButton = document.querySelector('#addition')
     if (button.target === additionButton && numberInput.textContent !== '' && button.target.classList.contains('addinprogress')) {
         concatCurrentInputToOpNumbers();
         addNumbers(operationNumbers, operationNumbers.length);
@@ -64,6 +67,30 @@ function additionButtonFunction(button) {
     } else if (button.target === additionButton && numberInput.textContent !== '') {
         concatCurrentInputToOpNumbers();
         additionButton.classList.add('addinprogress');
+        numberInput.textContent = '';
+    }
+}
+
+function resetOperationsInProgress() {
+    additionButton.classList.remove('addinprogress');
+    subtractionButton.classList.remove('subtractinprogress');
+    multiplicationButton.classList.remove('multiplyinprogress');
+    divisionButton.classList.remove('divideinprogress');
+}
+
+function resetOperationNumberArray() {
+    operationNumbers = [];
+}
+
+function equalsButtonFunction(button) {
+    const equalsButton = document.querySelector('#equals');
+    if (button.target === equalsButton) {
+        concatCurrentInputToOpNumbers()
+        if (additionButton.classList.contains('addinprogress')) {
+            addNumbers(operationNumbers, operationNumbers.length);
+        }
+        resetOperationNumberArray();
+        resetOperationsInProgress();
         numberInput.textContent = '';
     }
 }
@@ -78,3 +105,4 @@ function addNumbers(array, arrayLength) {
 
 buttonArea.addEventListener('click', writeToInput);
 buttonArea.addEventListener('click', additionButtonFunction);
+buttonArea.addEventListener('click', equalsButtonFunction);
