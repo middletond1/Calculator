@@ -54,7 +54,7 @@ function writeToInput(button) {
 }
 
 function writeOperationNumberToInput() {
-    
+    numberInput.textContent = `${operationNumbers[0]}`;
 }
 
 function concatCurrentInputToOpNumbers() {
@@ -114,6 +114,7 @@ function resolveCurrentEquation() {
     } else if (buttonArea.classList.contains('divideinprogress')) {
         divideNumbers(operationNumbers);
     }
+    writeOperationNumberToInput()
 }
 
 function handleEquation() {
@@ -165,7 +166,6 @@ function equalsButtonOnPress(button) {
         resolveCurrentEquation()
         resetOperationsInProgress();
         resetOperationNumberArray();
-        numberInput.textContent = '0';
     }
 }
 
