@@ -53,56 +53,127 @@ function writeToInput(button) {
     clearInput(button);
 }
 
+function writeOperationNumberToInput() {
+    
+}
+
 function concatCurrentInputToOpNumbers() {
     operationNumbers.push(parseFloat(numberInput.textContent));
+}
+
+function resetOperationsInProgress() {
+    buttonArea.classList.remove('addinprogress');
+    buttonArea.classList.remove('subtractinprogress');
+    buttonArea.classList.remove('multiplyinprogress');
+    buttonArea.classList.remove('divideinprogress');
+}
+
+function addNumbers(array) {
+    if (operationNumbers.length === 1) {
+        return;
+    }
+    let sum = array[0] + array[1];
+    operationNumbers = [sum];
     console.log(operationNumbers);
 }
 
-function additionButtonFunction(button) {
-    if (button.target === additionButton && numberInput.textContent !== '' && button.target.classList.contains('addinprogress')) {
-        concatCurrentInputToOpNumbers();
-        addNumbers(operationNumbers, operationNumbers.length);
-        additionButton.classList.add('addinprogress');
-        numberInput.textContent = '';
-    } else if (button.target === additionButton && numberInput.textContent !== '') {
-        concatCurrentInputToOpNumbers();
-        additionButton.classList.add('addinprogress');
+function subtractNumbers(array) {
+    if (operationNumbers.length === 1) {
+        return;
+    }
+    let difference = array[0] - array[1];
+    operationNumbers = [difference];
+    console.log(operationNumbers);
+}
+
+function multiplyNumbers(array) {
+    if (operationNumbers.length === 1) {
+        return;
+    }
+    let product = array[0] * array[1];
+    operationNumbers = [product];
+    console.log(operationNumbers);
+}
+
+function divideNumbers(array) {
+    if (operationNumbers.length === 1) {
+        return;
+    }
+    let quotient = array[0] / array[1];
+    operationNumbers = [quotient];
+    console.log(operationNumbers);
+}
+
+function resolveCurrentEquation() {
+    if (buttonArea.classList.contains('addinprogress')) {
+        addNumbers(operationNumbers);
+    } else if (buttonArea.classList.contains('subtractinprogress')) {
+        subtractNumbers(operationNumbers);
+    } else if (buttonArea.classList.contains('multiplyinprogress')) {
+        multiplyNumbers(operationNumbers);
+    } else if (buttonArea.classList.contains('divideinprogress')) {
+        divideNumbers(operationNumbers);
+    }
+}
+
+function handleEquation() {
+    concatCurrentInputToOpNumbers();
+    resolveCurrentEquation()
+    resetOperationsInProgress();
+}
+
+function additionButtonOnPress(button) {
+    if (button.target === additionButton && numberInput.textContent !== '') {
+        handleEquation();
+        buttonArea.classList.add('addinprogress');
         numberInput.textContent = '';
     }
 }
 
-function resetOperationsInProgress() {
-    additionButton.classList.remove('addinprogress');
-    subtractionButton.classList.remove('subtractinprogress');
-    multiplicationButton.classList.remove('multiplyinprogress');
-    divisionButton.classList.remove('divideinprogress');
+function subtractionButtonOnPress(button) {
+    if (button.target === subtractionButton && numberInput.textContent !== '') {
+        handleEquation();
+        buttonArea.classList.add('subtractinprogress');
+        numberInput.textContent = '';
+    }
+}
+
+function multiplicationButtonOnPress(button) {
+    if (button.target === multiplicationButton && numberInput.textContent !== '') {
+        handleEquation();
+        buttonArea.classList.add('multiplyinprogress');
+        numberInput.textContent = '';
+    }
+}
+
+function divisionButtonOnPress(button) {
+    if (button.target === divisionButton && numberInput.textContent !== '') {
+        handleEquation();
+        buttonArea.classList.add('divideinprogress');
+        numberInput.textContent = '';
+    }
 }
 
 function resetOperationNumberArray() {
     operationNumbers = [];
 }
 
-function equalsButtonFunction(button) {
+function equalsButtonOnPress(button) {
     const equalsButton = document.querySelector('#equals');
     if (button.target === equalsButton) {
         concatCurrentInputToOpNumbers()
-        if (additionButton.classList.contains('addinprogress')) {
-            addNumbers(operationNumbers, operationNumbers.length);
-        }
-        resetOperationNumberArray();
+        resolveCurrentEquation()
         resetOperationsInProgress();
-        numberInput.textContent = '';
+        resetOperationNumberArray();
+        numberInput.textContent = '0';
     }
 }
 
-function addNumbers(array, arrayLength) {
-    let sum = 0;
-    for (i = 0; i < arrayLength; i++) {
-        sum += array[i];
-    }
-    console.log(sum);
-}
+
 
 buttonArea.addEventListener('click', writeToInput);
-buttonArea.addEventListener('click', additionButtonFunction);
-buttonArea.addEventListener('click', equalsButtonFunction);
+buttonArea.addEventListener('click', additionButtonOnPress);
+buttonArea.addEventListener('click', subtractionButtonOnPress);
+buttonArea.addEventListener('click', multiplicationButtonOnPress);
+buttonArea.addEventListener('click', divisionButtonOnPress);
+buttonArea.addEventListener('click', equalsButtonOnPress);
