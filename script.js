@@ -23,13 +23,18 @@ function checkForSingleZero(button) {
     };
 }
 
+function checkForPressedClass() {
+    if (buttonArea.classList.contains('pressed')) {
+        numberInput.textContent = '';
+        buttonArea.classList.remove('pressed');
+    }
+}
+
 function writeNumberToNumberInput(button) {
     if (numberInput.textContent.length >= 15) {
         return;
     };
-    if (buttonArea.classList.contains('addinprogress')) {
-        numberInput.textContent = '';
-    }
+    checkForPressedClass();
     checkForSingleZero(button);
     numberInput.textContent = numberInput.textContent.concat(getNumberFromButton(button));
 }
@@ -129,7 +134,7 @@ function additionButtonOnPress(button) {
     if (button.target === additionButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('addinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
     if (button.target === additionButton && numberInput.textContent === '') {
         buttonArea.classList.add('addinprogress');
@@ -140,7 +145,7 @@ function subtractionButtonOnPress(button) {
     if (button.target === subtractionButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('subtractinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
     if (button.target === subtractionButton && numberInput.textContent === '') {
         buttonArea.classList.add('subtractinprogress');
@@ -151,7 +156,7 @@ function multiplicationButtonOnPress(button) {
     if (button.target === multiplicationButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('multiplyinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
     if (button.target === multiplicationButton && numberInput.textContent === '') {
         buttonArea.classList.add('multiplyinprogress');
@@ -162,7 +167,7 @@ function divisionButtonOnPress(button) {
     if (button.target === divisionButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('divideinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
     if (button.target === divisionButton && numberInput.textContent === '') {
         buttonArea.classList.add('divideinprogress');
@@ -180,6 +185,7 @@ function equalsButtonOnPress(button) {
         resolveCurrentEquation()
         resetOperationsInProgress();
         resetOperationNumberArray();
+        buttonArea.classList.add('pressed');
     }
 }
 
