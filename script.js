@@ -27,6 +27,9 @@ function writeNumberToNumberInput(button) {
     if (numberInput.textContent.length >= 15) {
         return;
     };
+    if (buttonArea.classList.contains('addinprogress')) {
+        numberInput.textContent = '';
+    }
     checkForSingleZero(button);
     numberInput.textContent = numberInput.textContent.concat(getNumberFromButton(button));
 }
@@ -114,7 +117,6 @@ function resolveCurrentEquation() {
     } else if (buttonArea.classList.contains('divideinprogress')) {
         divideNumbers(operationNumbers);
     }
-    writeOperationNumberToInput()
 }
 
 function handleEquation() {
@@ -129,6 +131,9 @@ function additionButtonOnPress(button) {
         buttonArea.classList.add('addinprogress');
         numberInput.textContent = '';
     }
+    if (button.target === additionButton && numberInput.textContent === '') {
+        buttonArea.classList.add('addinprogress');
+    }
 }
 
 function subtractionButtonOnPress(button) {
@@ -136,6 +141,9 @@ function subtractionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.add('subtractinprogress');
         numberInput.textContent = '';
+    }
+    if (button.target === subtractionButton && numberInput.textContent === '') {
+        buttonArea.classList.add('subtractinprogress');
     }
 }
 
@@ -145,6 +153,9 @@ function multiplicationButtonOnPress(button) {
         buttonArea.classList.add('multiplyinprogress');
         numberInput.textContent = '';
     }
+    if (button.target === multiplicationButton && numberInput.textContent === '') {
+        buttonArea.classList.add('multiplyinprogress');
+    }
 }
 
 function divisionButtonOnPress(button) {
@@ -152,6 +163,9 @@ function divisionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.add('divideinprogress');
         numberInput.textContent = '';
+    }
+    if (button.target === divisionButton && numberInput.textContent === '') {
+        buttonArea.classList.add('divideinprogress');
     }
 }
 
