@@ -23,10 +23,18 @@ function checkForSingleZero(button) {
     };
 }
 
+function checkForPressedClass() {
+    if (buttonArea.classList.contains('pressed')) {
+        numberInput.textContent = '';
+        buttonArea.classList.remove('pressed');
+    }
+}
+
 function writeNumberToNumberInput(button) {
     if (numberInput.textContent.length >= 15) {
         return;
     };
+    checkForPressedClass();
     checkForSingleZero(button);
     numberInput.textContent = numberInput.textContent.concat(getNumberFromButton(button));
 }
@@ -127,7 +135,7 @@ function additionButtonOnPress(button) {
     if (button.target === additionButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('addinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
 }
 
@@ -135,7 +143,7 @@ function subtractionButtonOnPress(button) {
     if (button.target === subtractionButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('subtractinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
 }
 
@@ -143,7 +151,7 @@ function multiplicationButtonOnPress(button) {
     if (button.target === multiplicationButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('multiplyinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
 }
 
@@ -151,7 +159,7 @@ function divisionButtonOnPress(button) {
     if (button.target === divisionButton && numberInput.textContent !== '') {
         handleEquation();
         buttonArea.classList.add('divideinprogress');
-        numberInput.textContent = '';
+        buttonArea.classList.add('pressed');
     }
 }
 
@@ -166,6 +174,7 @@ function equalsButtonOnPress(button) {
         resolveCurrentEquation()
         resetOperationsInProgress();
         resetOperationNumberArray();
+        buttonArea.classList.add('pressed');
     }
 }
 
