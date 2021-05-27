@@ -7,19 +7,22 @@ const multiplicationButton = document.querySelector('#multiplication');
 const divisionButton = document.querySelector('#division');
 let operationNumbers = [];
 
-function getNumberFromButton(button) {
-    let clickedNumber = '';
-    Array.from(numberButtons).map(numberButton => {
-        if (button.target.textContent === numberButton.textContent) {
-            clickedNumber = numberButton.textContent;
-        };
-    });
-    return clickedNumber;
-}
 
-function checkForSingleZero(button) {
-    if (numberInput.textContent === '0' && numberInput.textContent.length === 1 && button.target.classList.contains('number')) {
+// Draw to Input Functions
+// function getNumberFromButton(button) {
+//     let clickedNumber = '';
+//     Array.from(numberButtons).map(numberButton => {
+//         if (button.target.textContent === numberButton.textContent) {
+//             clickedNumber = numberButton.textContent;
+//         };
+//     });
+//     return clickedNumber;
+// }
+
+function checkForSingleZero() {
+    if (numberInput.textContent === '0' && numberInput.textContent.length === 1) {
         numberInput.textContent = '';
+        // && button.target.classList.contains('number')  --was inside if statement. why?
     };
 }
 
@@ -35,32 +38,34 @@ function writeNumberToNumberInput(button) {
         return;
     };
     checkForPressedClass();
-    checkForSingleZero(button);
-    numberInput.textContent = numberInput.textContent.concat(getNumberFromButton(button));
+    checkForSingleZero();
+    numberInput.textContent = numberInput.textContent.concat(button.textContent);
 }
 
-function insertDecimal(button) {
-    const decimalButton = document.querySelector('#decimal');
-    if (button.target === decimalButton) {
-        if (numberInput.textContent.includes('.')) {
-            return;
-        } else numberInput.textContent = numberInput.textContent.concat('.')
-    }
-}
+// function insertDecimal(button) {
+//     const decimalButton = document.querySelector('#decimal');
+//     if (button.target === decimalButton) {
+//         if (numberInput.textContent.includes('.')) {
+//             return;
+//         } else numberInput.textContent = numberInput.textContent.concat('.')
+//     }
+// }
 
-function clearInput(button) {
-    const clearButton = document.querySelector('#clear');
-    if (button.target === clearButton) {
-        numberInput.textContent = '0';
-    }
-}
+// function clearInput(button) {
+//     const clearButton = document.querySelector('#clear');
+//     if (button.target === clearButton) {
+//         numberInput.textContent = '0';
+//     }
+// }
 
-function writeToInput(button) {
-    writeNumberToNumberInput(button);
-    insertDecimal(button);
-    clearInput(button);
-}
+// function writeToInput(button) {
+//     writeNumberToNumberInput(button);
+//     insertDecimal(button);
+//     clearInput(button);
+// }
 
+
+//Operation Functions
 function writeOperationNumberToInput() {
     numberInput.textContent = `${operationNumbers[0]}`;
 }
@@ -122,6 +127,7 @@ function resolveCurrentEquation() {
     } else if (buttonArea.classList.contains('divideinprogress')) {
         divideNumbers(operationNumbers);
     }
+    writeOperationNumberToInput()
 }
 
 function handleEquation() {
@@ -135,10 +141,9 @@ function additionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.add('addinprogress');
         buttonArea.classList.add('pressed');
+        console.log('inside press');
     }
-    if (button.target === additionButton && numberInput.textContent === '') {
-        buttonArea.classList.add('addinprogress');
-    }
+    console.log('outside press');
 }
 
 function subtractionButtonOnPress(button) {
@@ -146,9 +151,6 @@ function subtractionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.add('subtractinprogress');
         buttonArea.classList.add('pressed');
-    }
-    if (button.target === subtractionButton && numberInput.textContent === '') {
-        buttonArea.classList.add('subtractinprogress');
     }
 }
 
@@ -158,9 +160,6 @@ function multiplicationButtonOnPress(button) {
         buttonArea.classList.add('multiplyinprogress');
         buttonArea.classList.add('pressed');
     }
-    if (button.target === multiplicationButton && numberInput.textContent === '') {
-        buttonArea.classList.add('multiplyinprogress');
-    }
 }
 
 function divisionButtonOnPress(button) {
@@ -168,9 +167,6 @@ function divisionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.add('divideinprogress');
         buttonArea.classList.add('pressed');
-    }
-    if (button.target === divisionButton && numberInput.textContent === '') {
-        buttonArea.classList.add('divideinprogress');
     }
 }
 
@@ -181,17 +177,33 @@ function resetOperationNumberArray() {
 function equalsButtonOnPress(button) {
     const equalsButton = document.querySelector('#equals');
     if (button.target === equalsButton) {
-        concatCurrentInputToOpNumbers()
-        resolveCurrentEquation()
-        resetOperationsInProgress();
-        resetOperationNumberArray();
+        handleEquation();
+        // resetOperationNumberArray();
         buttonArea.classList.add('pressed');
     }
 }
 
 
 
-buttonArea.addEventListener('click', writeToInput);
+// buttonArea.addEventListener('click', writeToInput);
+numberButtons.forEach(numButton => { 
+    numButton.addEventListener('click', () => {
+        writeNumberToNumberInput(numButton);
+    })
+});
+
+document.querySelector('#decimal').addEventListener('click', () => {
+    checkForPressedClass();
+    checkForSingleZero();
+    if (numberInput.textContent.includes('.')) {
+        return;
+    } else numberInput.textContent = numberInput.textContent.concat('.')
+});
+
+document.querySelector('#clear').addEventListener('click', () => {
+        numberInput.textContent = '0';
+})
+
 buttonArea.addEventListener('click', additionButtonOnPress);
 buttonArea.addEventListener('click', subtractionButtonOnPress);
 buttonArea.addEventListener('click', multiplicationButtonOnPress);
