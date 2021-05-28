@@ -34,3 +34,38 @@ function checkForPressedClass() {
         }
     })
 }
+
+//Old Draw Functions
+// function getNumberFromButton(button) {
+//     let clickedNumber = '';
+//     Array.from(numberButtons).map(numberButton => {
+//         if (button.target.textContent === numberButton.textContent) {
+//             clickedNumber = numberButton.textContent;
+//         };
+//     });
+//     return clickedNumber;
+// }
+
+// && button.target.classList.contains('number')  --was inside if statement on checkForSingleZero()
+
+// function insertDecimal(button) {
+//     const decimalButton = document.querySelector('#decimal');
+//     if (button.target === decimalButton) {
+//         if (numberInput.textContent.includes('.')) {
+//             return;
+//         } else numberInput.textContent = numberInput.textContent.concat('.')
+//     }
+// }
+
+// function clearInput(button) {
+//     const clearButton = document.querySelector('#clear');
+//     if (button.target === clearButton) {
+//         numberInput.textContent = '0';
+//     }
+// }
+
+// function writeToInput(button) {
+//     writeNumberToNumberInput(button);
+//     insertDecimal(button);
+//     clearInput(button);
+// }

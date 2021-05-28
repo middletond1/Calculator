@@ -9,20 +9,10 @@ let operationNumbers = [];
 
 
 // Draw to Input Functions
-// function getNumberFromButton(button) {
-//     let clickedNumber = '';
-//     Array.from(numberButtons).map(numberButton => {
-//         if (button.target.textContent === numberButton.textContent) {
-//             clickedNumber = numberButton.textContent;
-//         };
-//     });
-//     return clickedNumber;
-// }
 
 function checkForSingleZero() {
     if (numberInput.textContent === '0' && numberInput.textContent.length === 1) {
         numberInput.textContent = '';
-        // && button.target.classList.contains('number')  --was inside if statement. why?
     };
 }
 
@@ -50,29 +40,6 @@ function writeNumberToNumberInput(button) {
     checkForSingleZero();
     numberInput.textContent = numberInput.textContent.concat(button.textContent);
 }
-
-// function insertDecimal(button) {
-//     const decimalButton = document.querySelector('#decimal');
-//     if (button.target === decimalButton) {
-//         if (numberInput.textContent.includes('.')) {
-//             return;
-//         } else numberInput.textContent = numberInput.textContent.concat('.')
-//     }
-// }
-
-// function clearInput(button) {
-//     const clearButton = document.querySelector('#clear');
-//     if (button.target === clearButton) {
-//         numberInput.textContent = '0';
-//     }
-// }
-
-// function writeToInput(button) {
-//     writeNumberToNumberInput(button);
-//     insertDecimal(button);
-//     clearInput(button);
-// }
-
 
 //Operation Functions
 function writeOperationNumberToInput() {
@@ -153,9 +120,7 @@ function additionButtonOnPress(button) {
         buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('addinprogress');
         buttonArea.classList.add('pressed');
-        console.log('inside press');
     }
-    console.log('outside press');
 }
 
 function subtractionButtonOnPress(button) {
