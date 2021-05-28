@@ -33,11 +33,20 @@ function checkForPressedClass() {
     }
 }
 
+function checkForEqualPressedClass() {
+    if (buttonArea.classList.contains('equalPressed')) {
+        operationNumbers = [];
+        numberInput.textContent = '';
+        buttonArea.classList.remove('equalPressed');
+    }
+}
+
 function writeNumberToNumberInput(button) {
     if (numberInput.textContent.length >= 15) {
         return;
     };
     checkForPressedClass();
+    checkForEqualPressedClass()
     checkForSingleZero();
     numberInput.textContent = numberInput.textContent.concat(button.textContent);
 }
@@ -131,7 +140,9 @@ function resolveCurrentEquation() {
 }
 
 function handleEquation() {
-    concatCurrentInputToOpNumbers();
+    if (buttonArea.classList.contains('equalPressed') === false) {
+        concatCurrentInputToOpNumbers();
+    }   
     resolveCurrentEquation()
     resetOperationsInProgress();
 }
@@ -139,6 +150,7 @@ function handleEquation() {
 function additionButtonOnPress(button) {
     if (button.target === additionButton && numberInput.textContent !== '') {
         handleEquation();
+        buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('addinprogress');
         buttonArea.classList.add('pressed');
         console.log('inside press');
@@ -149,6 +161,7 @@ function additionButtonOnPress(button) {
 function subtractionButtonOnPress(button) {
     if (button.target === subtractionButton && numberInput.textContent !== '') {
         handleEquation();
+        buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('subtractinprogress');
         buttonArea.classList.add('pressed');
     }
@@ -157,6 +170,7 @@ function subtractionButtonOnPress(button) {
 function multiplicationButtonOnPress(button) {
     if (button.target === multiplicationButton && numberInput.textContent !== '') {
         handleEquation();
+        buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('multiplyinprogress');
         buttonArea.classList.add('pressed');
     }
@@ -165,6 +179,7 @@ function multiplicationButtonOnPress(button) {
 function divisionButtonOnPress(button) {
     if (button.target === divisionButton && numberInput.textContent !== '') {
         handleEquation();
+        buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('divideinprogress');
         buttonArea.classList.add('pressed');
     }
@@ -179,7 +194,7 @@ function equalsButtonOnPress(button) {
     if (button.target === equalsButton) {
         handleEquation();
         // resetOperationNumberArray();
-        buttonArea.classList.add('pressed');
+        buttonArea.classList.add('equalPressed');
     }
 }
 
@@ -201,7 +216,8 @@ document.querySelector('#decimal').addEventListener('click', () => {
 });
 
 document.querySelector('#clear').addEventListener('click', () => {
-        numberInput.textContent = '0';
+    operationNumbers.pop();
+    numberInput.textContent = '0';
 })
 
 buttonArea.addEventListener('click', additionButtonOnPress);
