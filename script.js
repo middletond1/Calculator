@@ -16,10 +16,10 @@ function checkForSingleZero() {
     };
 }
 
-function checkForPressedClass() {
-    if (buttonArea.classList.contains('pressed')) {
+function checkForOperatorPressedClass() {
+    if (buttonArea.classList.contains('operatorPressed')) {
         numberInput.textContent = '';
-        buttonArea.classList.remove('pressed');
+        buttonArea.classList.remove('operatorPressed');
     }
 }
 
@@ -35,7 +35,7 @@ function writeNumberToNumberInput(button) {
     if (numberInput.textContent.length >= 15) {
         return;
     };
-    checkForPressedClass();
+    checkForOperatorPressedClass();
     checkForEqualPressedClass()
     checkForSingleZero();
     numberInput.textContent = numberInput.textContent.concat(button.textContent);
@@ -119,7 +119,7 @@ function additionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('addinprogress');
-        buttonArea.classList.add('pressed');
+        buttonArea.classList.add('operatorPressed');
     }
 }
 
@@ -128,7 +128,7 @@ function subtractionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('subtractinprogress');
-        buttonArea.classList.add('pressed');
+        buttonArea.classList.add('operatorPressed');
     }
 }
 
@@ -137,7 +137,7 @@ function multiplicationButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('multiplyinprogress');
-        buttonArea.classList.add('pressed');
+        buttonArea.classList.add('operatorPressed');
     }
 }
 
@@ -146,7 +146,7 @@ function divisionButtonOnPress(button) {
         handleEquation();
         buttonArea.classList.remove('equalPressed');
         buttonArea.classList.add('divideinprogress');
-        buttonArea.classList.add('pressed');
+        buttonArea.classList.add('operatorPressed');
     }
 }
 
@@ -158,14 +158,10 @@ function equalsButtonOnPress(button) {
     const equalsButton = document.querySelector('#equals');
     if (button.target === equalsButton) {
         handleEquation();
-        // resetOperationNumberArray();
         buttonArea.classList.add('equalPressed');
     }
 }
 
-
-
-// buttonArea.addEventListener('click', writeToInput);
 numberButtons.forEach(numButton => { 
     numButton.addEventListener('click', () => {
         writeNumberToNumberInput(numButton);
@@ -173,7 +169,7 @@ numberButtons.forEach(numButton => {
 });
 
 document.querySelector('#decimal').addEventListener('click', () => {
-    checkForPressedClass();
+    checkForOperatorPressedClass();
     checkForSingleZero();
     if (numberInput.textContent.includes('.')) {
         return;

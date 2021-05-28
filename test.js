@@ -69,3 +69,5 @@ function checkForPressedClass() {
 //     insertDecimal(button);
 //     clearInput(button);
 // }
+
+// buttonArea.addEventListener('click', writeToInput);
