@@ -7,17 +7,34 @@ let operator = '';
 let solution = '';
 
 
+function drawToDisplay(button) {
+    checkForSingleZero()
+    numberInput.textContent += `${button}`;
+}
+
+function checkForSingleZero() {
+    if (numberInput.textContent === '0') {
+        numberInput.textContent = '';
+    };
+}
+
+function clearDisplay() {
+    numberInput.textContent = '';
+}
+
 numberButtons.forEach(numberButton => {
     numberButton.addEventListener('click', () => {
         const number = numberButton.textContent;
 
         if (!operator) {
             firstOperand += number;
+            drawToDisplay(number);
         }
         if (operator) {
+            clearDisplay()
             secondOperand += number;
+            drawToDisplay(number);
         }
-        
 
         console.log('firstOperand', firstOperand);
 
@@ -26,19 +43,43 @@ numberButtons.forEach(numberButton => {
     })
 })
 
+document.querySelector('#decimal').addEventListener('click', () => {
+    if (!operator) {
+        if (firstOperand.includes('.')) {
+            return
+        }
+        firstOperand += '.';
+        drawToDisplay('.')
+    }
+    if (operator) {
+        if (secondOperand.includes('.')) {
+            return
+        }
+        secondOperand += '.';
+        drawToDisplay('.')
+    }
+    if (solution) {
+        clearDisplay()
+        drawToDisplay('.')
+    }
+});
+// debugger;
 operatorButtons.forEach(operatorButton => {
     operatorButton.addEventListener('click', (event) => {
         const selectedOperator = event.target.textContent;
         if (firstOperand && secondOperand) {
             solveOperation()
+            firstOperand = solution;
         }
         if (firstOperand) {
             solution = '';
             operator = selectedOperator;
+            // clearDisplay()
         }
         if (solution) {
             firstOperand = solution;
             operator = selectedOperator;
+            clearDisplay()
         }
         console.log(operator);
     })
@@ -62,14 +103,13 @@ function solveOperation() {
         };
     }
     console.log(solution);
+    clearDisplay()
+    drawToDisplay(solution);
     firstOperand = '';
     secondOperand = '';
 }
 
 document.querySelector('#equals').addEventListener('click', () => {
     solveOperation();
-    if (solution) {
-        
-    }
     operator = '';
 })
