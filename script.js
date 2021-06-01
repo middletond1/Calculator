@@ -1,7 +1,7 @@
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const numberInput = document.querySelector('#numberinput');
-const operationButtons = document.querySelector('#operationButtons');
+const buttonsArea = document.querySelector('#buttons');
 let firstOperand = '';
 let secondOperand = '';
 let operator = '';
@@ -36,9 +36,9 @@ numberButtons.forEach(numberButton => {
             drawToDisplay(number);
         }
         if (operator) {
-            if (operationButtons.classList.contains('operatorClicked')) {
+            if (buttonsArea.classList.contains('operatorClicked')) {
                 clearDisplay()
-                operationButtons.classList.remove('operatorClicked')
+                buttonsArea.classList.remove('operatorClicked')
             }
             secondOperand += number;
             drawToDisplay(number);
@@ -64,9 +64,9 @@ document.querySelector('#decimal').addEventListener('click', () => {
         if (secondOperand.includes('.')) {
             return
         }
-        if (operationButtons.classList.contains('operatorClicked')) {
+        if (buttonsArea.classList.contains('operatorClicked')) {
             clearDisplay()
-            operationButtons.classList.remove('operatorClicked')
+            buttonsArea.classList.remove('operatorClicked')
         }
         secondOperand += '.';
         drawToDisplay('.');
@@ -105,7 +105,7 @@ operatorButtons.forEach(operatorButton => {
             operator = selectedOperator;
             clearDisplay()
         }
-        operationButtons.classList.add('operatorClicked');
+        buttonsArea.classList.add('operatorClicked');
         console.log(operator);
     })
 })

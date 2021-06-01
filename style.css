@@ -15,9 +15,7 @@ button:hover {
 #calculator {
     margin: 150px auto;
     width: 500px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
 }
 
 #buttons {
@@ -25,6 +23,51 @@ button:hover {
     display: grid;
     grid-template-rows: repeat(5, 75px);
     grid-template-columns: repeat(4, 1fr);
+}
+
+#numone {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+#numtwo {
+    grid-column: 2;
+    grid-row: 4;
+}
+
+#numthree {
+    grid-column: 3;
+    grid-row: 4;
+}
+
+#numfour {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+#numfive {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+#numsix {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+#numseven {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#numeight {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#numnine {
+    grid-column: 3;
+    grid-row: 2;
 }
 
 #equals {
