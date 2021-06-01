@@ -12,14 +12,37 @@ function drawToDisplay(button) {
     numberInput.textContent += `${button}`;
 }
 
+function clearDisplay() {
+    numberInput.textContent = '';
+}
+
 function checkForSingleZero() {
     if (numberInput.textContent === '0' && numberInput.textContent.length === 1) {
         numberInput.textContent = '';
     };
 }
 
-function clearDisplay() {
-    numberInput.textContent = '';
+function solveOperation() {
+    firstNumber = parseFloat(firstOperand);
+    secondNumber = parseFloat(secondOperand);
+    if (firstOperand && secondOperand && operator) {
+        if (operator === '+') {
+            solution = firstNumber + secondNumber;
+        };
+        if (operator === '-') {
+            solution = firstNumber - secondNumber;
+        };
+        if (operator === 'X') {
+            solution = firstNumber * secondNumber;
+        };
+        if (operator === '÷') {
+            solution = firstNumber / secondNumber;
+        };
+    }
+    clearDisplay()
+    drawToDisplay(solution);
+    firstOperand = '';
+    secondOperand = '';
 }
 
 numberButtons.forEach(numberButton => {
@@ -36,32 +59,26 @@ numberButtons.forEach(numberButton => {
         }
         if (operator) {
             if (buttonsArea.classList.contains('operatorClicked')) {
-                clearDisplay()
-                buttonsArea.classList.remove('operatorClicked')
+                clearDisplay();
+                buttonsArea.classList.remove('operatorClicked');
             }
             secondOperand += number;
             drawToDisplay(number);
         }
-        
-
-        console.log('firstOperand', firstOperand);
-
-        console.log('secondOperand', secondOperand);
-
     })
 })
 
 document.querySelector('#decimal').addEventListener('click', () => {
     if (!operator) {
         if (firstOperand.includes('.')) {
-            return
+            return;
         }
         firstOperand += '.';
-        drawToDisplay('.')
+        drawToDisplay('.');
     }
     if (operator) {
         if (secondOperand.includes('.')) {
-            return
+            return;
         }
         if (buttonsArea.classList.contains('operatorClicked')) {
             clearDisplay()
@@ -104,33 +121,8 @@ operatorButtons.forEach(operatorButton => {
             clearDisplay()
         }
         buttonsArea.classList.add('operatorClicked');
-        console.log(operator);
     })
 })
-
-function solveOperation() {
-    firstNumber = parseFloat(firstOperand);
-    secondNumber = parseFloat(secondOperand);
-    if (firstOperand && secondOperand && operator) {
-        if (operator === '+') {
-            solution = firstNumber + secondNumber;
-        };
-        if (operator === '-') {
-            solution = firstNumber - secondNumber;
-        };
-        if (operator === 'X') {
-            solution = firstNumber * secondNumber;
-        };
-        if (operator === '÷') {
-            solution = firstNumber / secondNumber;
-        };
-    }
-    console.log(solution);
-    clearDisplay()
-    drawToDisplay(solution);
-    firstOperand = '';
-    secondOperand = '';
-}
 
 document.querySelector('#equals').addEventListener('click', () => {
     solveOperation();
