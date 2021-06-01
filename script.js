@@ -1,6 +1,7 @@
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const numberInput = document.querySelector('#numberinput');
+const operationButtons = document.querySelector('#operationButtons');
 let firstOperand = '';
 let secondOperand = '';
 let operator = '';
@@ -26,15 +27,23 @@ numberButtons.forEach(numberButton => {
     numberButton.addEventListener('click', () => {
         const number = numberButton.textContent;
 
+        if (solution) {
+            clearDisplay();
+            solution = '';
+        }
         if (!operator) {
             firstOperand += number;
             drawToDisplay(number);
         }
         if (operator) {
-            // clearDisplay()
+            if (operationButtons.classList.contains('operatorClicked')) {
+                clearDisplay()
+                operationButtons.classList.remove('operatorClicked')
+            }
             secondOperand += number;
             drawToDisplay(number);
         }
+        
 
         console.log('firstOperand', firstOperand);
 
@@ -55,12 +64,17 @@ document.querySelector('#decimal').addEventListener('click', () => {
         if (secondOperand.includes('.')) {
             return
         }
+        if (operationButtons.classList.contains('operatorClicked')) {
+            clearDisplay()
+            operationButtons.classList.remove('operatorClicked')
+        }
         secondOperand += '.';
         drawToDisplay('.')
     }
     if (solution) {
         clearDisplay()
         drawToDisplay('.')
+        solution = '';
     }
 });
 
@@ -81,6 +95,7 @@ operatorButtons.forEach(operatorButton => {
             operator = selectedOperator;
             clearDisplay()
         }
+        operationButtons.classList.add('operatorClicked');
         console.log(operator);
     })
 })
