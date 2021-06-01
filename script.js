@@ -69,14 +69,24 @@ document.querySelector('#decimal').addEventListener('click', () => {
             operationButtons.classList.remove('operatorClicked')
         }
         secondOperand += '.';
-        drawToDisplay('.')
+        drawToDisplay('.');
     }
     if (solution) {
-        clearDisplay()
-        drawToDisplay('.')
+        clearDisplay();
+        drawToDisplay('.');
         solution = '';
     }
 });
+
+document.querySelector('#clear').addEventListener('click', () => {
+    if (firstOperand && !secondOperand) {
+        firstOperand = '';
+    }
+    if (secondOperand) {
+        secondOperand = '';
+    }
+    clearDisplay()
+})
 
 operatorButtons.forEach(operatorButton => {
     operatorButton.addEventListener('click', (event) => {
