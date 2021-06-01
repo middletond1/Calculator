@@ -6,14 +6,14 @@ let secondOperand = '';
 let operator = '';
 let solution = '';
 
-
+// debugger;
 function drawToDisplay(button) {
     checkForSingleZero()
     numberInput.textContent += `${button}`;
 }
 
 function checkForSingleZero() {
-    if (numberInput.textContent === '0') {
+    if (numberInput.textContent === '0' && numberInput.textContent.length === 1) {
         numberInput.textContent = '';
     };
 }
@@ -31,7 +31,7 @@ numberButtons.forEach(numberButton => {
             drawToDisplay(number);
         }
         if (operator) {
-            clearDisplay()
+            // clearDisplay()
             secondOperand += number;
             drawToDisplay(number);
         }
@@ -63,7 +63,7 @@ document.querySelector('#decimal').addEventListener('click', () => {
         drawToDisplay('.')
     }
 });
-// debugger;
+
 operatorButtons.forEach(operatorButton => {
     operatorButton.addEventListener('click', (event) => {
         const selectedOperator = event.target.textContent;
