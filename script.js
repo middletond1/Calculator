@@ -7,7 +7,6 @@ let secondOperand = '';
 let operator = '';
 let solution = '';
 
-// debugger;
 function drawToDisplay(button) {
     checkForSingleZero()
     numberInput.textContent += `${button}`;
@@ -98,7 +97,6 @@ operatorButtons.forEach(operatorButton => {
         if (firstOperand) {
             solution = '';
             operator = selectedOperator;
-            // clearDisplay()
         }
         if (solution) {
             firstOperand = solution;
