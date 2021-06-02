@@ -25,6 +25,18 @@ button:hover {
     grid-template-columns: repeat(4, 1fr);
 }
 
+.operator {
+    background-color: rgb(255, 147, 147);
+}
+
+#equals {
+    background-color: rgb(102, 250, 255);
+}
+
+#equals:hover {
+    background-color: slategray;
+}
+
 #numone {
     grid-column: 1;
     grid-row: 4;
