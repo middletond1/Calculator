@@ -1,6 +1,6 @@
 # JavaScript Calculator
 
-### A simpl calculator built with HTML, CSS, and JavaScript.
+### A simple calculator built with HTML, CSS, and JavaScript.
 
 #### View it [Here](https://middletond1.github.io/Calculator/)
 
